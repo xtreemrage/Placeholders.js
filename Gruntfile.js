@@ -115,16 +115,34 @@ module.exports = function (grunt) {
                     "build/placeholders.yui3.min.js": ["build/placeholders.yui3.js"]
                 }
             }
+        },
+        clean: {
+            dist: ["dist"]
+        },
+        copy: {
+            main: {
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    cwd: "build/",
+                    src: "*.js",
+                    dest: "dist/"
+                }]
+            }
         }
     });
 
     grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-uglify");
+    grunt.loadNpmTasks("grunt-contrib-clean");
+    grunt.loadNpmTasks("grunt-contrib-copy");
 
     grunt.registerTask("default", [
         "jshint",
         "concat",
-        "uglify"
+        "uglify",
+        "clean",
+        "copy"
     ]);
 };
